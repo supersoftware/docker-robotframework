@@ -1,12 +1,12 @@
 FROM gliderlabs/alpine:3.3
 
-# Install Python Pip and the Robot framework
-RUN apk-install bash py-pip firefox xvfb dbus chromium-chromedriver && \
-    pip install --upgrade pip && \
-    pip install robotframework robotframework-selenium2library selenium robotframework-xvfb && \
-    python --version
-    
-ADD run.sh /usr/local/bin/run.sh
-RUN chmod +x /usr/local/bin/run.sh
+LABEL name="Docker image for the Robot Framework http://robotframework.org/"
+LABEL usage="docker run --rm -v $(pwd)/path/to/tests/:/path/to/tests/ -ti robot-docker robot --variable HOST:example.com --outputdir results path/to/tests/"
 
-CMD ["run.sh"]
+#Install Python Pip and the Robot framework
+RUN apk-install bash py-pip firefox && \
+    pip install --upgrade pip && \
+    pip install robotframework robotframework-selenium2library selenium && \
+    python --help
+
+CMD ["robot"]
