@@ -1,7 +1,7 @@
-FROM gliderlabs/alpine:3.6
+FROM gliderlabs/alpine:3.3
 
 #Install Python Pip and the Robot framework
-RUN apk-install py-pip && \
+RUN apk-install bash py-pip && \
     pip install --upgrade pip && \
     pip install robotframework robotframework-selenium2library 'selenium>=2,<3' && \
     python --version
